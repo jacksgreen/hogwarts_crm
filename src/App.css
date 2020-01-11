@@ -1,38 +1,63 @@
+body {
+  color: #e6ffff;
+  font-family: 'Exo 2', sans-serif;
+}
+
 .App {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.load-content-button {
+  width: 200px;
+  height: 200px;
+  background-image: url('./images/hogwarts-logo.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+.content-wrapper {
+  background-color: #0c141f;
+  width: 100vw;
   min-height: 100vh;
   display: flex;
-  flex-direction: column;
   align-items: center;
+}
+
+.section {
+  margin: 10px;
+  height: calc(100vh - 26px);
+  width: 50vw;
+  border: 3px solid #e6ffff;
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  border-radius: 5px;
 }
 
-.App-link {
-  color: #61dafb;
+.left-section {
+  flex-direction: column;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.hp-logo {
+  width: 200px;
+  height: 200px;
+  background-image: url('./images/hp-logo.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.create-student-btn {
+  font-family: 'Exo 2', sans-serif;
+  background-color: #e6ffff;
+  color: #0c141f;
+  font-size: 14px;
+  border-radius: 5px;
+  border: none;
+  margin-top: 10px;
+  padding: 5px 10px;
 }

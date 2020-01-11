@@ -1,0 +1,48 @@
+.form-wrapper div {
+  font-size: 20px;
+  margin-bottom: 40px;
+}
+
+.form-wrapper input {
+  font-family: 'Exo 2', sans-serif;
+  font-size: 20px;
+  background-color: #0c141f;
+  padding: 10px;
+  margin-left: 5px;
+  color: #ffe64d;
+  border: none;
+  border-bottom: 2px solid #ffe64d;
+  outline: none;
+}
+
+.form-wrapper input:focus {
+  border-bottom: 2px solid #df740c;
+}
+
+.create-btn {
+  font-family: 'Exo 2', sans-serif;
+  background-color: #e6ffff;
+  color: #0c141f;
+  font-size: 20px;
+  border-radius: 5px;
+  border: none;
+  /* pointer-events: none; */
+}
+
+.select-form {
+  display: flex;
+  flex-direction: column;
+  margin: 0 20px;
+}
+
+.magic-skillz-wrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0px;
+}
+
+.new-student-data {
+  display: block;
+  font-size: 10px;
+  margin: none;
+}

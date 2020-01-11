@@ -1,0 +1,15 @@
+.current-student-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.edit-student-btn {
+  margin-top: 30px;
+  font-family: 'Exo 2', sans-serif;
+  background-color: #e6ffff;
+  color: #0c141f;
+  font-size: 20px;
+  border-radius: 5px;
+  border: none;
+  width: auto;
+}
