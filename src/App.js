@@ -67,9 +67,17 @@ function App() {
         <div className='right-section section'>
           {!activeStudent && !activeCreate && <div className='hp-logo'></div>}
           {activeStudent && (
-            <CurrentStudent activeStudentInfo={activeStudentInfo} />
+            <CurrentStudent
+              activeStudentInfo={activeStudentInfo}
+              getStudentData={getStudentData}
+            />
           )}
-          {activeCreate && <CreateNewStudent skillsList={skillsList} />}
+          {activeCreate && (
+            <CreateNewStudent
+              skillsList={skillsList}
+              getStudentData={getStudentData}
+            />
+          )}
         </div>
       </div>
     </div>

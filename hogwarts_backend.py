@@ -44,13 +44,14 @@ def hello():
 @app.route("/new")
 def send_list():
     skills_list_json = json.dumps(skills_list)
+    print('here')
     return skills_list_json
 
 @app.route('/addstudent', methods=['POST'] )
 def add_student():
-    existing_skill = {}
     student_data = request.get_json('firstName')
     new_student = {
+        'id': student_data['id'],
         'first_name': student_data['firstName'],
         'last_name': student_data['lastName'],
         'existing_skill': student_data['existingSkill'],
@@ -60,8 +61,26 @@ def add_student():
         'last_updated': student_data['lastUpdated']
     }
     student_list.append(new_student)
-    print(new_student)
     return 'success'
+
+@app.route('/addstudent/<id_key>', methods=['PUT'])
+def edit_student(id_key):
+    edit_data = request.get_json()
+    for student in student_list:
+        if student['id'] == edit_data['id']:
+            index = student_list.index(student)
+            edited_student = {
+                'id': edit_data['id'],
+                'first_name': edit_data['editFirstName'],
+                'last_name': edit_data['editLastName'],
+                'existing_skill': edit_data['editExistingSkill'],
+                'desired_skill': edit_data['editDesiredSkill'],
+                'desired_class': edit_data['editDesiredClass'],
+                'created': edit_data['created'],
+                'last_updated': edit_data['lastUpdated']
+            }
+            student_list[index] = edited_student
+    return 'edit success'
 
 if __name__ == "__main__":
     threading.Thread(target=app.run).start()

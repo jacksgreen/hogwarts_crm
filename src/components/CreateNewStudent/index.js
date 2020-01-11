@@ -3,8 +3,6 @@ import './styles.css';
 import { createNewStudent } from '../../lib/api';
 
 function CreateNewStudent(props) {
-  // when submitting - also need to create a creation time, last updated,
-
   let magicSkillz = props.skillsList[0];
   let courseList = props.skillsList[1];
 
@@ -58,7 +56,9 @@ function CreateNewStudent(props) {
   function handleSubmit() {
     let created = new Date().toISOString();
     let lastUpdated = created;
+    let id = (firstName + lastName).toLowerCase();
     let newStudent = {
+      id,
       firstName,
       lastName,
       existingSkill,
@@ -69,6 +69,7 @@ function CreateNewStudent(props) {
     };
     newStudent = JSON.stringify(newStudent);
     pushStudentToServer(newStudent);
+    props.getStudentData();
   }
 
   return (
