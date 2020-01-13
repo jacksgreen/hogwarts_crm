@@ -4,12 +4,14 @@ import StudentList from './components/StudentList';
 import { getStudentList, getSkillsList } from '../src/lib/api';
 import CurrentStudent from './components/CurrentStudent';
 import CreateNewStudent from './components/CreateNewStudent';
+import Dashboard from './components/Dashboard';
 
 function App() {
   const [activeStudent, setActiveStudent] = useState(false);
   const [activeCreate, setActiveCreate] = useState(false);
-  const [activeStudentInfo, setActiveStudentInfo] = useState({});
   const [showCreateButton, setShowCreateButton] = useState(false);
+  const [showDashboard, setShowDashboard] = useState(false);
+  const [activeStudentInfo, setActiveStudentInfo] = useState({});
   const [skillsList, setSkillsList] = useState([]);
   const [studentData, setStudentData] = useState([
     {
@@ -30,18 +32,29 @@ function App() {
     setShowCreateButton(true);
   };
 
-  function chooseStudent(obj) {
-    setActiveStudent(true);
+  function closeRightSide() {
     setActiveCreate(false);
+    setActiveStudent(false);
+    setShowDashboard(false);
+  }
+
+  function chooseStudent(obj) {
+    closeRightSide();
+    setActiveStudent(true);
     setActiveStudentInfo(obj);
   }
 
   const openCreateStudent = async () => {
     let skillsresponse = await getSkillsList();
     setSkillsList(skillsresponse.data);
+    closeRightSide();
     setActiveCreate(true);
-    setActiveStudent(false);
   };
+
+  function openDashboard() {
+    closeRightSide();
+    setShowDashboard(true);
+  }
 
   return (
     <div className='App'>
@@ -56,16 +69,21 @@ function App() {
             chooseStudent={chooseStudent}
           />
           {showCreateButton && (
-            <button
-              className='create-student-btn'
-              onClick={() => openCreateStudent()}
-            >
-              Create New Student
-            </button>
+            <div>
+              <button
+                className='create-student-btn'
+                onClick={() => openCreateStudent()}
+              >
+                Create New Student
+              </button>
+              <button onClick={() => openDashboard()}>Dashboard</button>
+            </div>
           )}
         </div>
         <div className='right-section section'>
-          {!activeStudent && !activeCreate && <div className='hp-logo'></div>}
+          {!activeStudent && !activeCreate && !showDashboard && (
+            <div className='hp-logo'></div>
+          )}
           {activeStudent && (
             <CurrentStudent
               activeStudentInfo={activeStudentInfo}
@@ -78,6 +96,7 @@ function App() {
               getStudentData={getStudentData}
             />
           )}
+          {showDashboard && <Dashboard studentData={studentData} />}
         </div>
       </div>
     </div>

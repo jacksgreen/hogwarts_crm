@@ -79,6 +79,7 @@ def edit_student(id_key):
                 'created': edit_data['created'],
                 'last_updated': edit_data['lastUpdated']
             }
+            print(edited_student)
             student_list[index] = edited_student
     return 'edit success'
 

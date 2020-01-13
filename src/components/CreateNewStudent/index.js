@@ -122,12 +122,6 @@ function CreateNewStudent(props) {
             Add Class
           </button>
         </div>
-        <div className='new-student'>
-          <div className='new-student-data'>New:</div>
-          <div>
-            {firstName} {lastName}
-          </div>
-        </div>
         <div>
           <button
             className='create-btn'

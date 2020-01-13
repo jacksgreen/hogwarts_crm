@@ -14,12 +14,14 @@ function CurrentStudent(props) {
     last_updated
   } = props.activeStudentInfo;
 
+  // using a spread (e.g [...objectname]) to help update the current student page automatically when editing the student
+
   const [editOpen, setEditOpen] = useState(false);
   const [editFirstName, setEditFirstName] = useState('');
   const [editLastName, setEditLastName] = useState('');
-  const [editExistingSkill, setEditExistingSkill] = useState(['']);
-  const [editDesiredSkill, setEditDesiredSkill] = useState(['']);
-  const [editDesiredClass, setEditDesiredClass] = useState(['']);
+  const [editExistingSkill, setEditExistingSkill] = useState([]);
+  const [editDesiredSkill, setEditDesiredSkill] = useState([]);
+  const [editDesiredClass, setEditDesiredClass] = useState([]);
   const [skillsList, setSkillsList] = useState([]);
 
   const editSkill = useRef(null);
