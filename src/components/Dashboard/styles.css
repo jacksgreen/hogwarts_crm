@@ -1,3 +1,13 @@
 .dashboard-wrapper {
   width: 90%;
+  max-height: inherit;
+}
+
+.chart-wrapper {
+  margin: 30px 0;
+}
+
+.chart-label {
+  margin: 15px 0;
+  font-size: 20px;
 }

@@ -3,9 +3,31 @@ import { Doughnut } from 'react-chartjs-2';
 import './styles.css';
 
 function Dashboard(props) {
+  let colorList = [
+    '#6fc3df',
+    '#e6ffff',
+    '#ffe64d',
+    '#df740c',
+    '#FED6FA',
+    '#6fc3df',
+    '#e6ffff',
+    '#ffe64d',
+    '#df740c',
+    '#FED6FA',
+    '#6fc3df',
+    '#e6ffff',
+    '#ffe64d',
+    '#df740c',
+    '#FED6FA',
+    '#6fc3df',
+    '#e6ffff',
+    '#ffe64d',
+    '#df740c',
+    '#FED6FA'
+  ];
+
   let studentSkillsObj = {};
   let studentDesiredObj = {};
-  let colorList = ['#6fc3df', '#e6ffff', '#ffe64d', '#df740c'];
 
   props.studentData.forEach(student => {
     student.existing_skill.forEach(skill => {
@@ -43,13 +65,12 @@ function Dashboard(props) {
   };
   return (
     <div className='dashboard-wrapper'>
-      <div>Dashboard</div>
-      <div>
-        <div>Student Skillz</div>
+      <div className='chart-wrapper'>
+        <div className='chart-label'>Student Skillz</div>
         <Doughnut data={skillsData} />
       </div>
-      <div>
-        <div>Desired Skillz</div>
+      <div className='chart-wrapper'>
+        <div className='chart-label'>Desired Skillz</div>
         <Doughnut data={desiredData} />
       </div>
     </div>

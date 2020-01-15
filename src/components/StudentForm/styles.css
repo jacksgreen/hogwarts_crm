@@ -1,0 +1,87 @@
+.form-wrapper {
+  height: inherit;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.form-wrapper input {
+  font-family: 'Exo 2', sans-serif;
+  font-size: 20px;
+  background-color: #0c141f;
+  padding: 10px;
+  margin-left: 5px;
+  color: #ffe64d;
+  border: none;
+  border-bottom: 2px solid #ffe64d;
+  outline: none;
+}
+
+.form-wrapper input:focus {
+  border-bottom: 2px solid #df740c;
+}
+
+.student-form-btn {
+  font-family: 'Exo 2', sans-serif;
+  background-color: #e6ffff;
+  color: #0c141f;
+  font-size: 20px;
+  border-radius: 5px;
+  border: none;
+  margin-bottom: 40px;
+}
+
+.select-form {
+  display: flex;
+  flex-direction: column;
+  margin: 0 20px;
+  align-items: center;
+}
+
+.magic-skillz-wrapper {
+  margin-bottom: 0px;
+}
+
+.new-student-data {
+  display: block;
+  font-size: 10px;
+  margin: none;
+}
+
+.display-data {
+  display: flex;
+  flex-direction: row;
+  margin: 0 20px;
+}
+
+.display-data-value {
+  margin: 0 5px;
+}
+.display-data-value:hover {
+  color: #ffe64d;
+}
+
+.form-title {
+  font-size: 35px;
+  margin-top: 40px;
+}
+
+.select-btn {
+  margin: 5px;
+  width: fit-content;
+  font-size: 13px;
+}
+
+.student-form-select {
+  font-family: 'Exo 2', sans-serif;
+  background-color: #0c141f;
+  border: 1px solid #ffe64d;
+  color: #e6ffff;
+  margin: 5px 0;
+  font-size: 13px;
+}
+
+.edit-form-btn {
+  margin-left: 10px;
+  margin-right: 10px;
+}

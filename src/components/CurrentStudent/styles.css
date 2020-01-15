@@ -1,6 +1,12 @@
+.current-student-outer-wrapper {
+  height: inherit;
+}
+
 .current-student-wrapper {
   display: flex;
   flex-direction: column;
+  height: inherit;
+  justify-content: space-evenly;
 }
 
 .edit-student-btn {
@@ -12,4 +18,28 @@
   border-radius: 5px;
   border: none;
   width: auto;
+}
+
+.all-skills-wrapper {
+  display: flex;
+}
+
+.all-details-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+.indiv-skills-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin: 10px 10px;
+}
+
+.student-name {
+  font-size: 35px;
+  margin: 20px 0;
+}
+
+.id-text {
+  font-size: 15px;
+  margin-top: 15px;
 }

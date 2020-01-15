@@ -3,14 +3,14 @@ import './App.css';
 import StudentList from './components/StudentList';
 import { getStudentList, getSkillsList } from '../src/lib/api';
 import CurrentStudent from './components/CurrentStudent';
-import CreateNewStudent from './components/CreateNewStudent';
 import Dashboard from './components/Dashboard';
+import StudentForm from './components/StudentForm';
 
 function App() {
   const [activeStudent, setActiveStudent] = useState(false);
-  const [activeCreate, setActiveCreate] = useState(false);
   const [showCreateButton, setShowCreateButton] = useState(false);
   const [showDashboard, setShowDashboard] = useState(false);
+  const [showStudentForm, setShowStudentForm] = useState(false);
   const [activeStudentInfo, setActiveStudentInfo] = useState({});
   const [skillsList, setSkillsList] = useState([]);
   const [studentData, setStudentData] = useState([
@@ -33,9 +33,9 @@ function App() {
   };
 
   function closeRightSide() {
-    setActiveCreate(false);
     setActiveStudent(false);
     setShowDashboard(false);
+    setShowStudentForm(false);
   }
 
   function chooseStudent(obj) {
@@ -48,7 +48,7 @@ function App() {
     let skillsresponse = await getSkillsList();
     setSkillsList(skillsresponse.data);
     closeRightSide();
-    setActiveCreate(true);
+    setShowStudentForm(true);
   };
 
   function openDashboard() {
@@ -67,21 +67,27 @@ function App() {
           <StudentList
             studentData={studentData}
             chooseStudent={chooseStudent}
+            closeRightSide={closeRightSide}
           />
           {showCreateButton && (
-            <div>
+            <div className='left-side-btn-wrapper'>
               <button
                 className='create-student-btn'
                 onClick={() => openCreateStudent()}
               >
                 Create New Student
               </button>
-              <button onClick={() => openDashboard()}>Dashboard</button>
+              <button
+                className='create-student-btn'
+                onClick={() => openDashboard()}
+              >
+                Dashboard
+              </button>
             </div>
           )}
         </div>
         <div className='right-section section'>
-          {!activeStudent && !activeCreate && !showDashboard && (
+          {!activeStudent && !showDashboard && !showStudentForm && (
             <div className='hp-logo'></div>
           )}
           {activeStudent && (
@@ -90,13 +96,14 @@ function App() {
               getStudentData={getStudentData}
             />
           )}
-          {activeCreate && (
-            <CreateNewStudent
-              skillsList={skillsList}
+
+          {showDashboard && <Dashboard studentData={studentData} />}
+          {showStudentForm && (
+            <StudentForm
               getStudentData={getStudentData}
+              skillsList={skillsList}
             />
           )}
-          {showDashboard && <Dashboard studentData={studentData} />}
         </div>
       </div>
     </div>
