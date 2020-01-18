@@ -43,3 +43,24 @@
   font-size: 15px;
   margin-top: 15px;
 }
+
+.email-form {
+  font-family: 'Exo 2', sans-serif;
+  font-size: 20px;
+  background-color: #0c141f;
+  padding: 10px;
+  margin-left: 5px;
+  color: #ffe64d;
+  border: none;
+  border-bottom: 2px solid #ffe64d;
+  outline: none;
+}
+
+.email-form:focus {
+  border-bottom: 2px solid #df740c;
+}
+
+.send-email {
+  background-color: #ffe5e5;
+  border: 1px solid #ff0000;
+}

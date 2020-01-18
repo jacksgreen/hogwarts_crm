@@ -11,6 +11,7 @@ function App() {
   const [showCreateButton, setShowCreateButton] = useState(false);
   const [showDashboard, setShowDashboard] = useState(false);
   const [showStudentForm, setShowStudentForm] = useState(false);
+  const [editOpen, setEditOpen] = useState(false);
   const [activeStudentInfo, setActiveStudentInfo] = useState({});
   const [skillsList, setSkillsList] = useState([]);
   const [studentData, setStudentData] = useState([
@@ -36,6 +37,7 @@ function App() {
     setActiveStudent(false);
     setShowDashboard(false);
     setShowStudentForm(false);
+    setEditOpen(false);
   }
 
   function chooseStudent(obj) {
@@ -54,6 +56,14 @@ function App() {
   function openDashboard() {
     closeRightSide();
     setShowDashboard(true);
+  }
+
+  function closeEditPage() {
+    setEditOpen(false);
+  }
+
+  function openEdit() {
+    setEditOpen(true);
   }
 
   return (
@@ -94,6 +104,10 @@ function App() {
             <CurrentStudent
               activeStudentInfo={activeStudentInfo}
               getStudentData={getStudentData}
+              editOpen={editOpen}
+              openEdit={openEdit}
+              closeEditPage={closeEditPage}
+              closeRightSide={closeRightSide}
             />
           )}
 
@@ -102,6 +116,7 @@ function App() {
             <StudentForm
               getStudentData={getStudentData}
               skillsList={skillsList}
+              closeRightSide={closeRightSide}
             />
           )}
         </div>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './styles.css';
-import { getSkillsList } from '../../lib/api';
+import { getSkillsList, sendEmail } from '../../lib/api';
 import StudentForm from '../StudentForm';
 
 function CurrentStudent(props) {
@@ -11,26 +11,48 @@ function CurrentStudent(props) {
     existing_skill,
     desired_skill,
     desired_class,
+    email_address,
     created,
     last_updated
   } = props.activeStudentInfo;
 
-  const [editOpen, setEditOpen] = useState(false);
   const [skillsList, setSkillsList] = useState([]);
-
-  function closeEdit() {
-    setEditOpen(false);
-  }
+  const [emailSubject, setEmailSubject] = useState('');
+  const [emailContent, setEmailContent] = useState('');
+  const [showEmail, setShowEmail] = useState(false);
 
   const openEditPage = async () => {
     let skillsresponse = await getSkillsList();
     setSkillsList(skillsresponse.data);
-    setEditOpen(true);
+    props.openEdit();
   };
+
+  function handleEmailSubject(event) {
+    setEmailSubject(event.target.value);
+  }
+
+  function handleEmailContent(event) {
+    setEmailContent(event.target.value);
+  }
+
+  function toggleEmail() {
+    setShowEmail(!showEmail);
+  }
+
+  function emailRequest() {
+    let emailObj = {
+      emailAddress: email_address,
+      subject: emailSubject,
+      content: emailContent
+    };
+    let emailInfo = { email: emailObj };
+    sendEmail(emailInfo);
+    toggleEmail();
+  }
 
   return (
     <div className='current-student-outer-wrapper'>
-      {!editOpen && (
+      {!props.editOpen && (
         <div className='current-student-wrapper'>
           <div className='student-name'>
             <b>
@@ -65,6 +87,12 @@ function CurrentStudent(props) {
             </div>
             <div className='indiv-skills-wrapper'>
               <div>
+                <b>Email Address:</b>
+              </div>
+              <div>{email_address}</div>
+            </div>
+            <div className='indiv-skills-wrapper'>
+              <div>
                 <b>Creation Time</b>
               </div>
               <div>{created}</div>
@@ -75,22 +103,66 @@ function CurrentStudent(props) {
               </div>
               <div>{last_updated}</div>
             </div>
+            <div>
+              <button
+                className='edit-student-btn'
+                onClick={() => toggleEmail()}
+              >
+                Email
+              </button>
+            </div>
           </div>
           <div>
-            <button className='edit-student-btn' onClick={() => openEditPage()}>
-              Edit
-            </button>
+            {showEmail && (
+              <div className='email-box'>
+                <div>
+                  <label>Subject</label>
+                  <input
+                    className='email-form'
+                    required
+                    type='text'
+                    onChange={event => handleEmailSubject(event)}
+                  ></input>
+                </div>
+                <div>
+                  <label>Content</label>
+                  <input
+                    className='email-form'
+                    required
+                    type='text'
+                    onChange={event => handleEmailContent(event)}
+                  ></input>
+                </div>
+                <div>
+                  <button
+                    className='edit-student-btn send-email'
+                    onClick={() => emailRequest()}
+                  >
+                    Send
+                  </button>
+                </div>
+              </div>
+            )}
+            <div>
+              <button
+                className='edit-student-btn'
+                onClick={() => openEditPage()}
+              >
+                Edit
+              </button>
+            </div>
           </div>
         </div>
       )}
 
-      {editOpen && (
+      {props.editOpen && (
         <StudentForm
           skillsList={skillsList}
           getStudentData={props.getStudentData}
           edit={true}
           activeStudentInfo={props.activeStudentInfo}
-          closeEdit={closeEdit}
+          closeEditPage={props.closeEditPage}
+          closeRightSide={props.closeRightSide}
         />
       )}
     </div>

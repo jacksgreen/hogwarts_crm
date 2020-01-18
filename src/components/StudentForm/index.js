@@ -1,10 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import {
-  createNewStudent,
-  getStudentList,
-  getSkillsList,
-  editStudent
-} from '../../lib/api';
+import { createNewStudent, editStudent } from '../../lib/api';
 import './styles.css';
 
 function CreateNewStudent(props) {
@@ -16,6 +11,7 @@ function CreateNewStudent(props) {
   const [existingSkill, setExistingSkill] = useState([]);
   const [desiredSkill, setDesiredSkill] = useState([]);
   const [desiredClass, setDesiredClass] = useState([]);
+  const [emailAddress, setEmailAddress] = useState([]);
 
   const skill = useRef(null);
   const skillValue = useRef(null);
@@ -35,6 +31,7 @@ function CreateNewStudent(props) {
       existing_skill,
       desired_skill,
       desired_class,
+      email_address,
       created,
       last_updated
     } = props.activeStudentInfo;
@@ -43,6 +40,7 @@ function CreateNewStudent(props) {
     setExistingSkill(existing_skill);
     setDesiredSkill(desired_skill);
     setDesiredClass(desired_class);
+    setEmailAddress(email_address);
   }
 
   function handleFirstName(event) {
@@ -51,6 +49,10 @@ function CreateNewStudent(props) {
 
   function handleLastName(event) {
     setLastName(event.target.value);
+  }
+
+  function handleEmailAddress(event) {
+    setEmailAddress(event.target.value);
   }
 
   function handleExistingSkill() {
@@ -86,22 +88,25 @@ function CreateNewStudent(props) {
   };
 
   function handleSubmit() {
+    if (firstName == '' || lastName == '') {
+      return;
+    }
     let created = new Date().toISOString();
     let lastUpdated = created;
-    let id = (firstName + lastName).toLowerCase();
     let newStudent = {
-      id,
       firstName,
       lastName,
       existingSkill,
       desiredSkill,
       desiredClass,
+      emailAddress,
       created,
       lastUpdated
     };
     newStudent = JSON.stringify(newStudent);
     pushStudentToServer(newStudent);
     props.getStudentData();
+    props.closeRightSide();
   }
 
   function handleEdit() {
@@ -115,11 +120,13 @@ function CreateNewStudent(props) {
       existingSkill,
       desiredSkill,
       desiredClass,
+      emailAddress,
       created,
       lastUpdated
     };
     newStudent = JSON.stringify(newStudent);
     pushEditToServer(newStudent);
+    props.closeRightSide();
   }
 
   const pushEditToServer = async obj => {
@@ -140,6 +147,7 @@ function CreateNewStudent(props) {
       <div>
         <label>First Name: </label>
         <input
+          required
           type='text'
           value={firstName}
           onChange={event => handleFirstName(event)}
@@ -148,6 +156,7 @@ function CreateNewStudent(props) {
       <div>
         <label>Last Name: </label>
         <input
+          required
           type='text'
           value={lastName}
           onChange={event => handleLastName(event)}
@@ -202,6 +211,15 @@ function CreateNewStudent(props) {
         >
           Add Class
         </button>
+      </div>
+      <div>
+        <label>Email Address</label>
+        <input
+          required
+          type='text'
+          value={emailAddress}
+          onChange={event => handleEmailAddress(event)}
+        ></input>
       </div>
       <div className='display-data'>
         <b>Existing:</b>
@@ -261,7 +279,7 @@ function CreateNewStudent(props) {
             <button
               type='button'
               className='student-form-btn edit-form-btn'
-              onClick={props.closeEdit}
+              onClick={props.closeEditPage}
             >
               Back
             </button>
